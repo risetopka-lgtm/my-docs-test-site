@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Kaspi Документы</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="css/kaspi.css">
+</head>
+<body>
+
+    <!-- ЭКРАН ВХОДА (ПИН-КОД) -->
+    <div class="screen" id="screen-lock">
+        <div class="lock-container">
+            <div class="lock-avatar">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#ccc" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            </div>
+            <div class="lock-title">Код быстрого доступа</div>
+            <div class="pin-dots" id="pin-dots">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+            <div class="pin-pad">
+                <button class="pin-key" onclick="inputPin(1)">1</button>
+                <button class="pin-key" onclick="inputPin(2)">2</button>
+                <button class="pin-key" onclick="inputPin(3)">3</button>
+                <button class="pin-key" onclick="inputPin(4)">4</button>
+                <button class="pin-key" onclick="inputPin(5)">5</button>
+                <button class="pin-key" onclick="inputPin(6)">6</button>
+                <button class="pin-key" onclick="inputPin(7)">7</button>
+                <button class="pin-key" onclick="inputPin(8)">8</button>
+                <button class="pin-key" onclick="inputPin(9)">9</button>
+                <button class="pin-key face-id-btn">
+                    <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M4 8V6a2 2 0 0 1 2-2h2M4 16v2a2 2 0 0 0 2 2h2M16 4h2a2 2 0 0 1 2 2v2M16 20h2a2 2 0 0 0 2-2v-2"/>
+                        <path d="M9 10v1M15 10v1M9 16c1 1 5 1 6 0"/>
+                    </svg>
+                </button>
+                <button class="pin-key zero-key" onclick="inputPin(0)">0</button>
+                <button class="pin-key delete-btn" onclick="deletePin()">
+                    <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 4H8l-7 8 7 8h13a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2z"/><line x1="18" y1="9" x2="12" y2="15"/><line x1="12" y1="9" x2="18" y2="15"/></svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ГЛАВНЫЙ ЭКРАН -->
+    <div class="screen" id="screen-home" style="display: none;">
+        <div class="app-header">
+            <img src="icons/logo-a.png" alt="Kaspi.kz" class="logo">
+            <span class="logo-text">Kaspi.kz</span>
+        </div>
+        <div class="services-grid">
+            <div class="service-item" onclick="openDocScreen()">
+                <div class="service-icon"><img src="icons/QR.png" alt="QR"></div><span>Kaspi QR</span>
+            </div>
+            <div class="service-item"><div class="service-icon"><img src="icons/Bank.png" alt="Банк"></div><span>Мой Банк</span></div>
+            <div class="service-item"><div class="service-icon"><img src="icons/Payments.png" alt="Платежи"></div><span>Платежи</span></div>
+            <div class="service-item"><div class="service-icon"><img src="icons/Transfers.png" alt="Переводы"></div><span>Переводы</span></div>
+            <div class="service-item"><div class="service-icon"><img src="icons/Shop.png" alt="Магазин"></div><span>Магазин</span></div>
+            <div class="service-item"><div class="service-icon"><img src="icons/Travel.png" alt="Travel"></div><span>Travel</span></div>
+            <div class="service-item" onclick="openDocScreen()"><div class="service-icon"><img src="icons/gov.png" alt="Госуслуги"></div><span>Госуслуги</span></div>
+            <div class="service-item"><div class="service-icon"><img src="icons/Ad.png" alt="Объявления"></div><span>Объявления</span></div>
+        </div>
+        <div class="magnum-block">
+            <img src="icons/magnum.png" alt="Magnum" class="magnum-icon">
+            <div class="magnum-info"><span class="magnum-title">Magnum</span><span class="magnum-sub">Продукты питания с бесплатной доставкой</span></div>
+            <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="#ccc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </div>
+        <div class="products-grid">
+            <div class="product-item"><img src="icons/Kredit.png" alt="Кредит" class="prod-icon"><div class="prod-info"><span class="prod-title">Кредит на Покупки</span><span class="prod-sub">Кредит или рассрочка 0%</span></div></div>
+            <div class="product-item"><img src="icons/KN.png" alt="Кредит Наличными" class="prod-icon"><div class="prod-info"><span class="prod-title">Кредит Наличными</span><span class="prod-sub">До 1 млн ₸</span></div></div>
+            <div class="product-item"><img src="icons/DepositNew.png" alt="Депозит" class="prod-icon"><div class="prod-info"><span class="prod-title">Kaspi Депозит</span><span class="prod-sub">Эффективная ставка 15%</span></div></div>
+            <div class="product-item"><img src="icons/Red.png" alt="Red" class="prod-icon"><div class="prod-info"><span class="prod-title">Kaspi Red</span><span class="prod-sub">Рассрочка 0%</span></div></div>
+        </div>
+        <div class="gadgets-section">
+            <h2 class="section-title">Телефоны и гаджеты</h2>
+            <div class="gadgets-grid">
+                <div class="gadget-item"><div class="gadget-img"><img src="icons/smartphones_new_main.png" alt="Смартфоны"></div><span>Смартфоны</span></div>
+                <div class="gadget-item"><div class="gadget-img"><img src="icons/smart_watches_new_main.png" alt="Смарт-часы"></div><span>Смарт-часы</span></div>
+                <div class="gadget-item"><div class="gadget-img"><img src="icons/fit_bras_new_main.png" alt="Фитнес-браслеты"></div><span>Фитнес-браслеты</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ЭКРАН ДОКУМЕНТА -->
+    <div class="screen" id="screen-doc" style="transform: translateX(100%);">
+        <div class="ios-header">
+            <button class="ios-back-btn" onclick="closeDocScreen()">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#f14635" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+            </button>
+            <div class="ios-title">Удостоверение личности</div>
+            <div class="ios-header-placeholder"></div>
+        </div>
+
+        <!-- Табы -->
+        <div class="kaspi-tabs">
+            <div class="kaspi-tab active" onclick="switchTab('doc', this)">Документ</div>
+            <div class="kaspi-tab" onclick="switchTab('req', this)">Реквизиты</div>
+        </div>
+
+        <!-- Контент: Документ -->
+        <div class="doc-content active" id="tab-doc">
+            <div class="id-card-wrapper" id="id-wrapper">
+                <!-- Плейсхолдер -->
+                <div class="id-card-placeholder" id="id-placeholder">
+                    <div class="id-card-inner">
+                        <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="#f14635" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M15 8h2M15 12h2M7 16h10"/></svg>
+                        <span>Нет фото документа</span>
+                    </div>
+                    <button class="id-card-upload-btn" onclick="document.getElementById('file-input').click()">Загрузить фото</button>
+                </div>
+                <!-- Контейнер для картинки -->
+                <div class="id-card-image-container" id="id-image-container" style="display: none;">
+                    <img id="preview-img" class="id-card-image" src="" alt="Документ">
+                </div>
+            </div>
+        </div>
+
+        <!-- Контент: Реквизиты -->
+        <div class="doc-content" id="tab-req">
+            <div class="ios-list">
+                <div class="ios-list-item"><span class="ios-list-label">ФИО</span><input type="text" class="ios-list-value" value="123123"></div>
+                <div class="ios-list-item"><span class="ios-list-label">ИИН</span><input type="text" class="ios-list-value" value="313123"></div>
+                <div class="ios-list-item"><span class="ios-list-label">Дата рождения</span><input type="text" class="ios-list-value" value="31312"></div>
+                <div class="ios-list-item"><span class="ios-list-label">Номер документа</span><input type="text" class="ios-list-value" value="123124"></div>
+                <div class="ios-list-item"><span class="ios-list-label">Дата выдачи</span><input type="text" class="ios-list-value" value=""></div>
+                <div class="ios-list-item"><span class="ios-list-label">Срок действия</span><span class="ios-list-value">25.10.2031</span></div>
+            </div>
+        </div>
+
+        <!-- Нижние кнопки -->
+        <div class="doc-footer">
+            <button class="btn-primary-blue">
+                <img src="icons/QR.png" alt="QR" style="width: 20px; height: 20px; margin-right: 8px; filter: brightness(0) invert(1);">
+                Предъявить документ
+            </button>
+            <button class="btn-secondary-white">
+                <img src="icons/arrow.png" alt="Отправить" style="width: 20px; height: 20px; margin-right: 8px; transform: rotate(90deg); filter: invert(37%) sepia(93%) saturate(3000%) hue-rotate(180deg);">
+                Отправить документ
+            </button>
+        </div>
+    </div>
+
+    <input type="file" id="file-input" accept="image/*" style="display: none;" onchange="handleFileUpload(event)">
+    <script src="js/app.js"></script>
+</body>
+</html>
